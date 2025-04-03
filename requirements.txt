@@ -4,5 +4,7 @@ pandas
 matplotlib
 langchain_groq
 autoviz
-getpass
-
+openpyxl
+IPython
+setuptools
+python-dotenv
