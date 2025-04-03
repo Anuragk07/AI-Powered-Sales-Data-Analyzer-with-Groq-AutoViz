@@ -4,7 +4,7 @@ This is a Python-based web application built with **Streamlit**, **Groq**, and *
 
 ## Features
 
-- **Upload CSV**: Allows users to upload CSV files containing sales data.
+- **Upload CSV/Excel**: Users can upload CSV or Excel files containing sales data for analysis.
 - **AI-Generated Analysis Plan**: The app uses **Groq LLM** to generate insights and suggestions for descriptive, predictive, and prescriptive analysis.
 - **Dimensions & Measures Identification**: Automatically identifies categorical variables (Dimensions) and numerical variables (Measures) from the dataset.
 - **Automated EDA**: Utilizes **AutoViz** for generating visualizations based on the uploaded data.
