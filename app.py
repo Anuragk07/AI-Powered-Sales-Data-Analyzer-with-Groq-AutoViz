@@ -1,14 +1,19 @@
 import streamlit as st
 import pandas as pd
 import os
+from dotenv import load_dotenv  # Import dotenv
 import getpass
 import matplotlib.pyplot as plt
 from langchain_groq import ChatGroq
 from autoviz.AutoViz_Class import AutoViz_Class
 
-# Set up API key dynamically (asks user to enter once)
-if "GROQ_API_KEY" not in os.environ:
-    os.environ["GROQ_API_KEY"] = getpass.getpass("Enter your Groq API key: ")
+# Load environment variables from .env file
+load_dotenv()
+
+# Set up API key from the environment
+groq_api_key = os.getenv("GROQ_API_KEY")
+if not groq_api_key:
+    st.warning("⚠️ GROQ_API_KEY not set in the environment. Please set it in the .env file.")
 
 # Initialize Groq LLM
 llm = ChatGroq(
@@ -35,10 +40,15 @@ def identify_dimensions_measures(df):
 st.title("📊 AI-Powered Sales Data Analyzer with Groq & AutoViz")
 
 # File Upload
-uploaded_file = st.file_uploader("📂 Upload a CSV file", type=["csv"])
+uploaded_file = st.file_uploader("📂 Upload a CSV or Excel file", type=["csv", "xlsx"])
 
 if uploaded_file:
-    df = pd.read_csv(uploaded_file)
+    # Check file type and read accordingly
+    if uploaded_file.name.endswith(".csv"):
+        df = pd.read_csv(uploaded_file)
+    elif uploaded_file.name.endswith(".xlsx"):
+        df = pd.read_excel(uploaded_file)
+    
     st.success("✅ File uploaded successfully!")
 
     # Identify Dimensions & Measures
@@ -112,4 +122,4 @@ if uploaded_file:
             st.warning("⚠️ Please enter a question!")
 
 else:
-    st.info("📂 Please upload a CSV file to proceed.")
+    st.info("📂 Please upload a CSV or Excel file to proceed.")
