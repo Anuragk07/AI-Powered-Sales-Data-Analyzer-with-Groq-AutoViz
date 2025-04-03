@@ -1,0 +1,8 @@
+langchain-community
+streamlit
+pandas
+matplotlib
+langchain_groq
+autoviz
+getpass
+
